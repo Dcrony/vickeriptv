@@ -1,6 +1,53 @@
-function toggleMobileMenu() { alert('Mobile menu: navigation links available in full desktop view.'); }
-function selectServer(el, name) { document.querySelectorAll('.server-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); console.log('Selected server:', name); }
-function switchTab(tab) { const subPlans = document.getElementById('subscriptionPlans'), resPlans = document.getElementById('resellerPlans'), subBtn = document.getElementById('subBtn'), resBtn = document.getElementById('resBtn'); if (tab === 'subscription') { subPlans.classList.remove('hidden'); resPlans.classList.add('hidden'); subBtn.classList.add('active'); resBtn.classList.remove('active'); } else { subPlans.classList.add('hidden'); resPlans.classList.remove('hidden'); resBtn.classList.add('active'); subBtn.classList.remove('active'); } }
-function buyPlan(plan, price) { alert(`Thank you! You selected ${plan} for ${price}. Our team will contact you on WhatsApp for payment and activation.`); window.open('https://wa.me/234XXXXXXXXXX', '_blank'); }
-function toggleFaq(btn) { const answer = btn.nextElementSibling; const icon = btn.querySelector('.faq-icon i'); if (answer.style.maxHeight) { answer.style.maxHeight = null; icon.classList.remove('fa-minus'); icon.classList.add('fa-plus'); } else { answer.style.maxHeight = answer.scrollHeight + "px"; icon.classList.remove('fa-plus'); icon.classList.add('fa-minus'); } }
-document.addEventListener("DOMContentLoaded", () => { const reveals = document.querySelectorAll('.reveal'); const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1 }); reveals.forEach(el => observer.observe(el)); });
+function toggleMobileMenu() {
+    alert('Mobile menu: navigation links available in full desktop view.');
+}
+
+function selectServer(el, name) {
+    document.querySelectorAll('.server-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    console.log('Selected server:', name);
+}
+function switchTab(tab) {
+    const subPlans = document.getElementById('subscriptionPlans'),
+        resPlans = document.getElementById('resellerPlans'),
+        subBtn = document.getElementById('subBtn'),
+        resBtn = document.getElementById('resBtn');
+    if (tab === 'subscription') {
+        subPlans.classList.remove('hidden');
+        resPlans.classList.add('hidden');
+        subBtn.classList.add('active');
+        resBtn.classList.remove('active');
+    } else {
+        subPlans.classList.add('hidden');
+        resPlans.classList.remove('hidden');
+        resBtn.classList.add('active');
+        subBtn.classList.remove('active');
+    }
+}
+function buyPlan(plan, price) {
+    alert(`Thank you! You selected ${plan} for ${price}. Our team will contact you on WhatsApp for payment and activation.`); window.open('https://wa.me/234XXXXXXXXXX', '_blank');
+}
+function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon i');
+    if (answer.style.maxHeight) {
+        answer.style.maxHeight = null;
+        icon.classList.remove('fa-minus');
+        icon.classList.add('fa-plus');
+    } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        icon.classList.remove('fa-plus');
+        icon.classList.add('fa-minus');
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+});
