@@ -200,7 +200,199 @@ footer p{color:var(--text-muted);font-size:0.85rem}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:var(--red)}
+
+
+  .pricing-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    background: var(--bg-card);
+    padding: 0.4rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .toggle-btn {
+    flex: 1;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .toggle-btn:hover { color: var(--text); }
+  .toggle-btn.active {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(229,9,20,0.3);
+  }
+  .toggle-icon { font-size: 1rem; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .pricing-grid.hidden { display: none; }
+
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.8rem;
+    text-align: left;
+    position: relative;
+    transition: all 0.4s;
+  }
+  .price-card:hover {
+    border-color: rgba(229,9,20,0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  }
+  .price-card.popular {
+    border-color: var(--red);
+    background: linear-gradient(180deg, rgba(229,9,20,0.05) 0%, var(--bg-card) 100%);
+    box-shadow: 0 0 30px rgba(229,9,20,0.08);
+  }
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    background: var(--red);
+    color: #fff;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(229,9,20,0.3);
+  }
+  .price-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .price-card .subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .price {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    margin: 1rem 0;
+  }
+  .price span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .connections-badge, .credits-badge {
+    display: inline-block;
+    background: rgba(0,200,83,0.1);
+    color: var(--green);
+    padding: 0.25rem 0.7rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .credits-badge {
+    background: rgba(255,193,7,0.1);
+    color: #ffc107;
+  }
+  .price-features {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+  }
+  .price-features li {
+    padding: 0.4rem 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+  .btn-sub {
+    background: #2a2a2a;
+    color: var(--text);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 0.9rem;
+    font-size: 0.9rem;
+  }
+  .btn-sub:hover {
+    background: #3a3a3a;
+    transform: translateY(-1px);
+    box-shadow: none;
+  }
+  .btn-res {
+    background: #2a2a2a;
+    color: var(--text);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 0.9rem;
+    font-size: 0.9rem;
+  }
+  .btn-res:hover {
+    background: #3a3a3a;
+    transform: translateY(-1px);
+    box-shadow: none;
+  }
+  .price-card.popular .btn-sub,
+  .price-card.popular .btn-res {
+    background: var(--red);
+    color: #fff;
+  }
+  .price-card.popular .btn-sub:hover,
+  .price-card.popular .btn-res:hover {
+    background: var(--red-hover);
+  }
+  .guarantee {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--green);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .guarantee .icon { font-size: 1rem; }
+
+  @media (max-width: 768px) {
+    .pricing-toggle { max-width: 280px; }
+    .toggle-btn { font-size: 0.8rem; padding: 0.6rem; }
+    .price { font-size: 2.2rem; }
+  }
 </style>
+
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"VStream IPTV","url":"https://yourdomain.com","logo":"https://yourdomain.com/logo.svg","description":"Premium IPTV streaming service with 50,000+ channels in 4K & 8K","contactPoint":{"@type":"ContactPoint","contactType":"Customer Support","availableLanguage":["English"]},"sameAs":["https://wa.me/234XXXXXXXXXX"]}
@@ -337,17 +529,30 @@ footer p{color:var(--text-muted);font-size:0.85rem}
   </div>
 </section>
 
-<section id="pricing">
+
+pricing_section = '''<section id="pricing">
   <div class="section-title">
-    <div class="badge">Pricing</div>
+    <div class="badge">Pricing Plans</div>
     <h2>Choose Your Plan</h2>
-    <p>Flexible pricing for every need. Instant activation.</p>
+    <p>Flexible pricing for every need</p>
   </div>
-  <div class="pricing-grid">
+
+  <!-- Toggle Switch -->
+  <div class="pricing-toggle">
+    <button class="toggle-btn active" id="subBtn" onclick="switchTab('subscription')">
+      <span class="toggle-icon">🛒</span> Subscription
+    </button>
+    <button class="toggle-btn" id="resBtn" onclick="switchTab('reseller')">
+      <span class="toggle-icon">👥</span> Reseller
+    </button>
+  </div>
+
+  <!-- Subscription Plans -->
+  <div class="pricing-grid" id="subscriptionPlans">
     <div class="price-card reveal">
       <h3>1 Month</h3>
       <p class="subtitle">Perfect for trying out</p>
-      <div class="price">$10</div>
+      <div class="price">$15<span>/month</span></div>
       <span class="connections-badge">1 Connection</span>
       <ul class="price-features">
         <li>20,000+ Live Channels</li>
@@ -356,13 +561,13 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <li>1 Connection</li>
         <li>24/7 Support</li>
       </ul>
-      <button class="btn" style="width:100%;justify-content:center;" onclick="buyPlan('1 Month','$10')">Buy Now</button>
+      <button class="btn btn-sub" style="width:100%;justify-content:center;" onclick="buyPlan('1 Month','$15')">Subscribe Now</button>
     </div>
     <div class="price-card popular reveal">
-      <div class="popular-badge">Most Popular</div>
+      <div class="popular-badge">🌟 MOST POPULAR</div>
       <h3>3 Months</h3>
-      <p class="subtitle">Best value short-term</p>
-      <div class="price">$25</div>
+      <p class="subtitle">Most popular choice</p>
+      <div class="price">$25<span>/3 months</span></div>
       <span class="connections-badge">2 Connections</span>
       <ul class="price-features">
         <li>20,000+ Live Channels</li>
@@ -372,12 +577,12 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <li>24/7 Support</li>
         <li>Anti-Buffer Tech</li>
       </ul>
-      <button class="btn" style="width:100%;justify-content:center;" onclick="buyPlan('3 Months','$25')">Buy Now</button>
+      <button class="btn btn-sub" style="width:100%;justify-content:center;" onclick="buyPlan('3 Months','$25')">Subscribe Now</button>
     </div>
     <div class="price-card reveal">
       <h3>6 Months</h3>
-      <p class="subtitle">Serious streamers</p>
-      <div class="price">$45</div>
+      <p class="subtitle">Great value</p>
+      <div class="price">$45<span>/6 months</span></div>
       <span class="connections-badge">3 Connections</span>
       <ul class="price-features">
         <li>20,000+ Live Channels</li>
@@ -388,12 +593,12 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <li>Anti-Buffer Tech</li>
         <li>PPV Events</li>
       </ul>
-      <button class="btn" style="width:100%;justify-content:center;" onclick="buyPlan('6 Months','$45')">Buy Now</button>
+      <button class="btn btn-sub" style="width:100%;justify-content:center;" onclick="buyPlan('6 Months','$45')">Subscribe Now</button>
     </div>
     <div class="price-card reveal">
       <h3>12 Months</h3>
-      <p class="subtitle">Maximum savings</p>
-      <div class="price">$80</div>
+      <p class="subtitle">Best deal</p>
+      <div class="price">$70<span>/year</span></div>
       <span class="connections-badge">4 Connections</span>
       <ul class="price-features">
         <li>20,000+ Live Channels</li>
@@ -405,10 +610,67 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <li>PPV Events</li>
         <li>VIP Support</li>
       </ul>
-      <button class="btn" style="width:100%;justify-content:center;" onclick="buyPlan('12 Months','$80')">Buy Now</button>
+      <button class="btn btn-sub" style="width:100%;justify-content:center;" onclick="buyPlan('12 Months','$70')">Subscribe Now</button>
     </div>
   </div>
-  <div class="guarantee"><span class="icon">🛡️</span><span>7-Day Money Back Guarantee — Full refund if not satisfied</span></div>
+
+  <!-- Reseller Plans (hidden by default) -->
+  <div class="pricing-grid hidden" id="resellerPlans">
+    <div class="price-card reveal">
+      <h3>Starter</h3>
+      <p class="subtitle">Begin your reseller journey</p>
+      <div class="price">$100<span>/one-time</span></div>
+      <span class="credits-badge">100 Credits</span>
+      <ul class="price-features">
+        <li>100 Credits Included</li>
+        <li>Reseller Panel Access</li>
+        <li>Create Sub-Resellers</li>
+        <li>Manage Customers</li>
+        <li>Real-time Statistics</li>
+        <li>24/7 Support</li>
+      </ul>
+      <button class="btn btn-res" style="width:100%;justify-content:center;" onclick="buyPlan('Reseller Starter','$100')">Get Started</button>
+    </div>
+    <div class="price-card popular reveal">
+      <div class="popular-badge">🌟 MOST POPULAR</div>
+      <h3>Pro</h3>
+      <p class="subtitle">Scale your business</p>
+      <div class="price">$250<span>/one-time</span></div>
+      <span class="credits-badge">300 Credits</span>
+      <ul class="price-features">
+        <li>300 Credits Included</li>
+        <li>Reseller Panel Access</li>
+        <li>Create Sub-Resellers</li>
+        <li>Manage Customers</li>
+        <li>Real-time Statistics</li>
+        <li>Priority Support</li>
+        <li>Custom Branding</li>
+      </ul>
+      <button class="btn btn-res" style="width:100%;justify-content:center;" onclick="buyPlan('Reseller Pro','$250')">Get Started</button>
+    </div>
+    <div class="price-card reveal">
+      <h3>Enterprise</h3>
+      <p class="subtitle">Maximum profits</p>
+      <div class="price">$500<span>/one-time</span></div>
+      <span class="credits-badge">700 Credits</span>
+      <ul class="price-features">
+        <li>700 Credits Included</li>
+        <li>Reseller Panel Access</li>
+        <li>Create Sub-Resellers</li>
+        <li>Manage Customers</li>
+        <li>Real-time Statistics</li>
+        <li>VIP Support</li>
+        <li>Custom Branding</li>
+        <li>API Access</li>
+      </ul>
+      <button class="btn btn-res" style="width:100%;justify-content:center;" onclick="buyPlan('Reseller Enterprise','$500')">Get Started</button>
+    </div>
+  </div>
+
+  <div class="guarantee">
+    <span class="icon">🛡️</span>
+    <span>7-Day Money Back Guarantee</span>
+  </div>
 </section>
 
 <section id="devices" class="devices-section">
@@ -546,6 +808,26 @@ window.addEventListener('scroll',()=>{
   if(window.scrollY>50)header.style.background='rgba(5,5,5,0.98)';
   else header.style.background='rgba(5,5,5,0.9)';
 });
+
+
+  function switchTab(tab) {
+    const subBtn = document.getElementById('subBtn');
+    const resBtn = document.getElementById('resBtn');
+    const subPlans = document.getElementById('subscriptionPlans');
+    const resPlans = document.getElementById('resellerPlans');
+
+    if (tab === 'subscription') {
+      subBtn.classList.add('active');
+      resBtn.classList.remove('active');
+      subPlans.classList.remove('hidden');
+      resPlans.classList.add('hidden');
+    } else {
+      resBtn.classList.add('active');
+      subBtn.classList.remove('active');
+      resPlans.classList.remove('hidden');
+      subPlans.classList.add('hidden');
+    }
+  }
 </script>
 
 </body>
