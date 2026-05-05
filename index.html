@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VStream IPTV - Premium Streaming Service</title>
+<meta name="description" content="Best IPTV subscription with thousands of live channels, movies and series in HD & 4K. Affordable and reliable.">
+<meta name="keywords" content="IPTV, streaming, 4K channels, subscription, reseller panel">
+<meta name="author" content="VStream">
+<meta property="og:title" content="VStream IPTV">
+<meta property="og:description" content="Unlimited entertainment at your fingertips">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #111111;
+    --bg-elevated: #1a1a1a;
+    --red: #e50914;
+    --red-hover: #b20710;
+    --text: #ffffff;
+    --text-muted: #a0a0a0;
+    --border: #222222;
+    --green: #00c853;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--red);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  nav { display: flex; gap: 2rem; }
+  nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--red);
+    color: #fff !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .nav-cta:hover { background: var(--red-hover); }
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 5% 4rem;
+    position: relative;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(229,9,20,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(229,9,20,0.08) 0%, transparent 50%),
+      var(--bg);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1920&q=80') center/cover;
+    opacity: 0.15;
+    z-index: 0;
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(229,9,20,0.15);
+    border: 1px solid rgba(229,9,20,0.3);
+    color: var(--red);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 900px;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--red);
+  }
+  .hero-stat .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(229,9,20,0.3); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); background: transparent; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* Section common */
+  section { padding: 5rem 5%; }
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .section-title h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .section-title p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .feature-card:hover {
+    border-color: var(--red);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(229,9,20,0.1);
+  }
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(229,9,20,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.8rem;
+  }
+  .feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .feature-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  /* Platforms / Streaming Apps */
+  .platforms {
+    background: var(--bg-card);
+  }
+  .platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .platform-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .platform-card:hover { transform: scale(1.05); }
+  .platform-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .platform-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+  }
+  .platform-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 2;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Sports */
+  .sports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .sport-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .sport-card:hover { border-color: var(--red); }
+  .sport-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    filter: brightness(0.9);
+  }
+  .sport-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .price-card:hover {
+    border-color: var(--red);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(229,9,20,0.15);
+  }
+  .price-card.popular {
+    border-color: var(--red);
+    background: linear-gradient(180deg, rgba(229,9,20,0.08) 0%, var(--bg-card) 100%);
+  }
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--red);
+    color: #fff;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .price-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .price {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--red);
+    margin: 1rem 0;
+  }
+  .price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .price-features {
+    list-style: none;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  .price-features li {
+    padding: 0.4rem 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* FAQ */
+  .faq {
+    background: var(--bg-card);
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .faq-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s;
+  }
+  .faq-question:hover { color: var(--red); }
+  .faq-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    color: var(--red);
+  }
+  .faq-item.active .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  .faq-answer-inner {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .faq-item.active .faq-answer {
+    max-height: 300px;
+  }
+
+  /* Devices */
+  .devices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .device-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: all 0.3s;
+  }
+  .device-item:hover {
+    border-color: var(--red);
+    color: var(--text);
+  }
+  .device-item .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* Contact / CTA */
+  .cta-section {
+    background: linear-gradient(135deg, rgba(229,9,20,0.1) 0%, transparent 100%);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  .cta-section p {
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  footer .logo { margin-bottom: 1rem; display: inline-block; }
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  footer .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  footer .footer-links a:hover { color: var(--red); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .mobile-menu-btn { display: block; }
+    .hero { padding-top: 6rem; }
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { gap: 1rem; }
+    section { padding: 3rem 5%; }
+    .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#" class="logo">VStream</a>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#platforms">Platforms</a>
+    <a href="#sports">Sports</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </nav>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+</header>
+
+<section class="hero">
+  <div class="hero-badge animate">🔴 Live Now — 50K+ Channels</div>
+  <h1 class="animate delay-1">Unlimited IPTV Streaming in HD & 4K</h1>
+  <p class="animate delay-2">Watch 50,000+ live channels, movies, series, and sports from around the world. Fast servers, zero buffering, instant activation.</p>
+  <div class="hero-stats animate delay-3">
+    <div class="hero-stat"><div class="num">50K+</div><div class="label">Channels</div></div>
+    <div class="hero-stat"><div class="num">4K</div><div class="label">Ultra HD</div></div>
+    <div class="hero-stat"><div class="num">99.9%</div><div class="label">Uptime</div></div>
+    <div class="hero-stat"><div class="num">24/7</div><div class="label">Support</div></div>
+  </div>
+  <div class="hero-btns animate delay-4">
+    <a href="#pricing" class="btn">View Plans</a>
+    <a href="https://wa.me/234XXXXXXXXXX" class="btn btn-outline" target="_blank">📱 WhatsApp Us</a>
+  </div>
+</section>
+
+<section id="features">
+  <div class="section-title">
+    <h2>Why Choose VStream</h2>
+    <p>Everything you need for the ultimate streaming experience</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Ultra Fast Servers</h3>
+      <p>High-speed dedicated servers with anti-freeze technology for smooth streaming.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📺</div>
+      <h3>50,000+ Channels</h3>
+      <p>Live TV from every country — news, entertainment, kids, documentaries & more.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎬</div>
+      <h3>Movies & Series</h3>
+      <p>Massive VOD library with the latest blockbusters and binge-worthy series.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <h3>Worldwide Access</h3>
+      <p>Works from anywhere in the world. All you need is a stable internet connection.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Secure & Private</h3>
+      <p>Encrypted connections and secure payment methods to protect your data.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎧</div>
+      <h3>24/7 Support</h3>
+      <p>Our team is always online to help you with setup, issues, or questions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="platforms" class="platforms">
+  <div class="section-title">
+    <h2>All Your Favorite Platforms</h2>
+    <p>Access premium content from the biggest streaming services</p>
+  </div>
+  <div class="platforms-grid">
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80" alt="Netflix">
+      <div class="platform-name">Netflix</div>
+    </div>
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80" alt="Prime Video">
+      <div class="platform-name">Prime Video</div>
+    </div>
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&q=80" alt="Disney+">
+      <div class="platform-name">Disney+</div>
+    </div>
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&q=80" alt="HBO Max">
+      <div class="platform-name">HBO Max</div>
+    </div>
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Hulu">
+      <div class="platform-name">Hulu</div>
+    </div>
+    <div class="platform-card">
+      <img src="https://images.unsplash.com/photo-1517604931442-7105376f2611?w=400&q=80" alt="Apple TV+">
+      <div class="platform-name">Apple TV+</div>
+    </div>
+  </div>
+</section>
+
+<section id="sports">
+  <div class="section-title">
+    <h2>Live Sports Coverage</h2>
+    <p>Never miss a game. All major leagues and tournaments included.</p>
+  </div>
+  <div class="sports-grid">
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏆</div>
+      <h4>UEFA Champions League</h4>
+    </div>
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">⚽</div>
+      <h4>Premier League</h4>
+    </div>
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏀</div>
+      <h4>NBA</h4>
+    </div>
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏈</div>
+      <h4>NFL</h4>
+    </div>
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">⚾</div>
+      <h4>MLB</h4>
+    </div>
+    <div class="sport-card">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏎️</div>
+      <h4>F1 Racing</h4>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-title">
+    <h2>Simple Pricing</h2>
+    <p>Choose the plan that fits you best. Instant delivery.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>1 Month</h3>
+      <div class="price">$10<span>/mo</span></div>
+      <ul class="price-features">
+        <li>50,000+ Live Channels</li>
+        <li>Full VOD Library</li>
+        <li>HD & 4K Quality</li>
+        <li>1 Connection</li>
+        <li>24/7 Support</li>
+      </ul>
+      <button class="btn" style="width:100%; justify-content:center;" onclick="buyPlan('1 Month - $10')">Buy Now</button>
+    </div>
+    <div class="price-card popular">
+      <div class="popular-badge">Best Value</div>
+      <h3>6 Months</h3>
+      <div class="price">$50<span>/6mo</span></div>
+      <ul class="price-features">
+        <li>50,000+ Live Channels</li>
+        <li>Full VOD Library</li>
+        <li>HD & 4K Quality</li>
+        <li>1 Connection</li>
+        <li>24/7 Priority Support</li>
+        <li>Save $10</li>
+      </ul>
+      <button class="btn" style="width:100%; justify-content:center;" onclick="buyPlan('6 Months - $50')">Buy Now</button>
+    </div>
+    <div class="price-card">
+      <h3>12 Months</h3>
+      <div class="price">$80<span>/yr</span></div>
+      <ul class="price-features">
+        <li>50,000+ Live Channels</li>
+        <li>Full VOD Library</li>
+        <li>HD & 4K Quality</li>
+        <li>1 Connection</li>
+        <li>24/7 Priority Support</li>
+        <li>Save $40</li>
+      </ul>
+      <button class="btn" style="width:100%; justify-content:center;" onclick="buyPlan('12 Months - $80')">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="devices">
+  <div class="section-title">
+    <h2>Works On All Devices</h2>
+    <p>One subscription, every screen.</p>
+  </div>
+  <div class="devices-grid">
+    <div class="device-item"><span class="icon">📱</span>Android Phone</div>
+    <div class="device-item"><span class="icon">📺</span>Smart TV</div>
+    <div class="device-item"><span class="icon">🔲</span>Android Box</div>
+    <div class="device-item"><span class="icon">🍎</span>iOS / iPhone</div>
+    <div class="device-item"><span class="icon">💻</span>PC / Laptop</div>
+    <div class="device-item"><span class="icon">🎮</span>MAG Box</div>
+    <div class="device-item"><span class="icon">📡</span>Enigma2</div>
+    <div class="device-item"><span class="icon">▶️</span>Fire Stick</div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="section-title">
+    <h2>Frequently Asked Questions</h2>
+    <p>Got questions? We've got answers.</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What devices are supported?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          We support all major devices including Smart TVs (Samsung, LG, Sony), Android phones & boxes, iPhone/iPad, MAG boxes, Enigma2, DreamBox, PC/Mac, Amazon Fire Stick, and any device that supports M3U or Xtream Codes.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How fast will I receive my subscription?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Your subscription is delivered instantly after payment confirmation. In most cases, you'll receive your login credentials within 5-10 minutes via email or WhatsApp.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you offer a free trial?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes! We offer a 24-hour free trial so you can test our service before committing. Contact us on WhatsApp to request your trial.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Can I use it on multiple devices?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Each subscription includes 1 connection by default. You can purchase additional connections for a small fee if you want to watch on multiple devices simultaneously.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What internet speed do I need?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          We recommend a minimum of 15 Mbps for HD streaming and 25+ Mbps for 4K content. A stable connection is more important than raw speed — ethernet is preferred over WiFi for the best experience.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Is there a refund policy?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          We offer a 7-day money-back guarantee if our service does not work on your device. Simply contact our support team and we'll process your refund promptly.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-section">
+  <h2>Ready to Start Streaming?</h2>
+  <p>Join thousands of happy customers. Get instant access to unlimited entertainment.</p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <a href="#pricing" class="btn">Get Started Now</a>
+    <a href="https://wa.me/234XXXXXXXXXX" class="btn btn-outline" target="_blank">💬 Chat on WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">VStream</a>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2026 VStream IPTV. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll to pricing
+  function scrollToPricing() {
+    document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Buy plan
+  function buyPlan(plan) {
+    const msg = encodeURIComponent("Hi, I'm interested in the " + plan + " plan. Can you help me get started?");
+    window.open("https://wa.me/234XXXXXXXXXX?text=" + msg, "_blank");
+  }
+
+  // Contact
+  function contact() {
+    window.location.href = "https://wa.me/234XXXXXXXXXX";
+  }
+
+  // FAQ Toggle
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isActive = item.classList.contains('active');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    // Open clicked if it wasn't active
+    if (!isActive) item.classList.add('active');
+  }
+
+  // Mobile menu
+  function toggleMobileMenu() {
+    const nav = document.querySelector('nav');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    nav.style.position = 'absolute';
+    nav.style.top = '100%';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.flexDirection = 'column';
+    nav.style.background = 'rgba(10,10,10,0.95)';
+    nav.style.padding = '1rem 5%';
+    nav.style.backdropFilter = 'blur(12px)';
+    nav.style.borderBottom = '1px solid var(--border)';
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .platform-card, .price-card, .sport-card, .device-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.style.background = 'rgba(10,10,10,0.95)';
+    } else {
+      header.style.background = 'rgba(10,10,10,0.85)';
+    }
+  });
+</script>
+
+</body>
+</html>
