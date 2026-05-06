@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>M3U to Xtream Codes Converter | IPTV Info Extractor</title>
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #0a0a0f 0%, #0f0f17 100%);
             font-family: 'Inter', sans-serif;
@@ -22,8 +15,6 @@
             padding: 2rem 1.5rem;
             min-height: 100vh;
         }
-
-        /* professional glassmorphic container */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -34,10 +25,7 @@
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             padding: 2rem 2rem 2.5rem;
-            transition: all 0.2s ease;
         }
-
-        /* header badge & title */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -69,11 +57,7 @@
             padding-left: 1rem;
             font-weight: 400;
         }
-
-        /* input group */
-        .input-group {
-            margin: 1.8rem 0 1rem;
-        }
+        .input-group { margin: 1.8rem 0 1rem; }
         label {
             font-weight: 600;
             display: flex;
@@ -83,14 +67,8 @@
             font-size: 0.9rem;
             color: #e4e4e7;
         }
-        label i {
-            color: #818cf8;
-        }
-        .m3u-input-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        label i { color: #818cf8; }
+        .m3u-input-wrapper { display: flex; flex-direction: column; gap: 1rem; }
         textarea {
             width: 100%;
             background: #0c0c14;
@@ -149,15 +127,23 @@
             border-color: #6366f1;
             color: white;
         }
-
-        /* info card (result section) */
+        /* Copy All button — distinct green teal accent */
+        .btn-copy-all {
+            background: linear-gradient(105deg, #059669, #10b981);
+            color: white;
+            box-shadow: 0 5px 12px rgba(16, 185, 129, 0.3);
+        }
+        .btn-copy-all:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+        }
         .info-card {
             margin-top: 2rem;
             background: rgba(8, 8, 14, 0.7);
             border-radius: 1.5rem;
             border: 1px solid rgba(99, 102, 241, 0.25);
             overflow: hidden;
-            transition: all 0.2s;
         }
         .info-header {
             background: rgba(99, 102, 241, 0.12);
@@ -165,17 +151,18 @@
             border-bottom: 1px solid rgba(99, 102, 241, 0.3);
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 0.6rem;
             font-weight: 700;
             font-size: 1.1rem;
         }
-        .info-header i {
-            color: #818cf8;
-            font-size: 1.2rem;
+        .info-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
-        .info-content {
-            padding: 1.6rem 1.8rem;
-        }
+        .info-header i { color: #818cf8; font-size: 1.2rem; }
+        .info-content { padding: 1.6rem 1.8rem; }
         .detail-row {
             display: flex;
             flex-wrap: wrap;
@@ -209,10 +196,7 @@
             font-size: 0.8rem;
             transition: 0.1s;
         }
-        .copy-btn:hover {
-            color: white;
-            transform: scale(1.05);
-        }
+        .copy-btn:hover { color: white; transform: scale(1.05); }
         .alert-message {
             background: rgba(239, 68, 68, 0.18);
             border-left: 4px solid #f87171;
@@ -232,13 +216,6 @@
             gap: 0.6rem;
             align-items: center;
         }
-        .example-link {
-            color: #818cf8;
-            text-decoration: none;
-            font-size: 0.8rem;
-            cursor: pointer;
-            border-bottom: 1px dashed #6366f1;
-        }
         .footer-note {
             margin-top: 2rem;
             text-align: center;
@@ -255,15 +232,13 @@
             font-size: 0.8rem;
             margin-top: 1rem;
         }
-        hr {
-            border-color: #262636;
-            margin: 1rem 0;
-        }
+        hr { border-color: #262636; margin: 1rem 0; }
         @media (max-width: 600px) {
             body { padding: 1rem; }
             .container { padding: 1.5rem; }
             .detail-label { width: 110px; }
             .btn { padding: 0.7rem 1.2rem; }
+            .info-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
         }
         .spinner {
             display: inline-block;
@@ -302,16 +277,25 @@
     <!-- Result Card -->
     <div id="resultCard" class="info-card" style="display: none;">
         <div class="info-header">
-            <i class="fas fa-circle-info"></i> Account Information · Xtream Codes
+            <div class="info-header-left">
+                <i class="fas fa-circle-info"></i> Account Information · Xtream Codes
+            </div>
+            <!-- COPY ALL DETAILS BUTTON -->
+            <button class="btn btn-copy-all" id="copyAllBtn" title="Copy all extracted details to clipboard">
+                <i class="fas fa-copy"></i> Copy All Details
+            </button>
         </div>
         <div class="info-content" id="infoContent">
-            <!-- dynamic details will appear here -->
             <div class="success-note" id="extractNote">
-                <i class="fas fa-check-circle" style="color:#10b981;"></i> <span>M3U parsed successfully! Xtream credentials extracted below.</span>
+                <i class="fas fa-check-circle" style="color:#10b981;"></i>
+                <span>M3U parsed successfully! Xtream credentials extracted below.</span>
             </div>
             <div id="dynamicDetails"></div>
             <div style="margin-top: 1.2rem; display: flex; justify-content: flex-end;">
-                <span class="contact-line"><i class="fab fa-whatsapp" style="color:#25D366;"></i> <span>Need help? <a href="#" id="contactLink" style="color:#a5b4fc; text-decoration: none;">Contact us</a></span></span>
+                <span class="contact-line">
+                    <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+                    <span>Need help? <a href="#" id="contactLink" style="color:#a5b4fc; text-decoration: none;">Contact us</a></span>
+                </span>
             </div>
         </div>
     </div>
@@ -327,185 +311,129 @@
 
 <script>
     (function() {
-        // DOM elements
-        const m3uTextarea = document.getElementById('m3uInput');
-        const getInfoBtn = document.getElementById('getInfoBtn');
-        const exampleBtn = document.getElementById('exampleBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const resultCard = document.getElementById('resultCard');
+        const m3uTextarea   = document.getElementById('m3uInput');
+        const getInfoBtn    = document.getElementById('getInfoBtn');
+        const exampleBtn    = document.getElementById('exampleBtn');
+        const clearBtn      = document.getElementById('clearBtn');
+        const copyAllBtn    = document.getElementById('copyAllBtn');
+        const resultCard    = document.getElementById('resultCard');
         const dynamicDetailsDiv = document.getElementById('dynamicDetails');
-        const errorBox = document.getElementById('errorBox');
+        const errorBox      = document.getElementById('errorBox');
 
-        // Helper: show error message
+        // Store last parsed result for "Copy All"
+        let lastParsedResult = null;
+
         function showError(msg) {
             errorBox.style.display = 'block';
             errorBox.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${msg}`;
             resultCard.style.display = 'none';
-            setTimeout(() => {
-                if(errorBox.style.display === 'block') {
-                    // auto hide after 6 sec but not critical
-                }
-            }, 5000);
         }
+        function hideError() { errorBox.style.display = 'none'; }
 
-        function hideError() {
-            errorBox.style.display = 'none';
-        }
-
-        // clear result
         function clearResult() {
             resultCard.style.display = 'none';
             dynamicDetailsDiv.innerHTML = '';
+            lastParsedResult = null;
             hideError();
         }
 
-        // helper: smart M3U / Xtream parser
         function parseM3UtoXtream(m3uString) {
             let trimmed = m3uString.trim();
-            if(!trimmed) {
-                throw new Error("Please enter a valid M3U URL.");
-            }
+            if (!trimmed) throw new Error("Please enter a valid M3U URL.");
 
-            // 1) check if it's already an Xtream Codes URL format (contains ?username= & password=)
             let urlObj = null;
             try {
-                // attempt to parse as URL
-                if(trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+                if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
                     urlObj = new URL(trimmed);
+                } else if (!trimmed.includes('://') && trimmed.includes('username=')) {
+                    trimmed = 'https://' + trimmed;
+                    urlObj = new URL(trimmed);
+                } else if (!trimmed.includes('://')) {
+                    throw new Error("Invalid URL format. Use http:// or https://");
                 } else {
-                    // maybe user pasted without protocol? try to add https
-                    if(trimmed.includes('://') === false && trimmed.includes('username=')) {
-                        trimmed = 'https://' + trimmed;
-                        urlObj = new URL(trimmed);
-                    } else if(trimmed.includes('://') === false) {
-                        // might be a raw path but we can't parse
-                        throw new Error("Invalid URL format. Use http:// or https://");
-                    } else {
-                        urlObj = new URL(trimmed);
-                    }
+                    urlObj = new URL(trimmed);
                 }
             } catch(e) {
                 throw new Error("The M3U link is not a valid URL. Make sure it starts with http:// or https://");
             }
 
-            let params = urlObj.searchParams;
+            let params   = urlObj.searchParams;
             let username = params.get('username');
             let password = params.get('password');
 
-            // If we have both username & password in query, it's Xtream format
-            if(username && password) {
+            if (username && password) {
                 let host = urlObj.origin;
-                let playlistName = extractPlaylistNameFromUrl(trimmed);
-                let m3uLink = trimmed;
-                let epgLink = null;
-
-                // try to build EPG link from convention: host/xmltv.php?username=xxx&password=xxx
-                if(host && username && password) {
-                    epgLink = `${host}/xmltv.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-                }
-
-                // expiry? sometimes it's in URL or we can simulate by checking type? not guaranteed, but we can look for 'expires' or something
-                let expiryText = "Not specified (check panel)";
-                if(params.get('expires')) expiryText = params.get('expires');
-                else if(params.get('expiry')) expiryText = params.get('expiry');
-
+                let epgLink = `${host}/xmltv.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+                let expiryText = params.get('expires') || params.get('expiry') || "Not specified (check panel)";
                 return {
-                    success: true,
-                    type: 'xtream',
-                    host: host,
-                    username: username,
-                    password: password,
-                    playlistName: playlistName,
-                    m3uLink: m3uLink,
-                    epgLink: epgLink,
-                    expiry: expiryText,
-                    raw: trimmed
+                    success: true, type: 'xtream', host, username, password,
+                    playlistName: extractPlaylistNameFromUrl(trimmed),
+                    m3uLink: trimmed, epgLink, expiry: expiryText, raw: trimmed
                 };
             }
 
-            // 2) Generic M3U: might not contain credentials directly, but we can try to extract server and try to guess
-            // Some M3U lines contain metadata: #EXTINF... etc, but the URL itself may have embedded user/pass.
-            // We parse the m3u content as string if it's a full m3u text, otherwise try deeper.
-            // but user could have provided a plain text m3u content? we treat it as link.
-            // For generic M3U link (ending .m3u or containing m3u in url), maybe we can extract domain and produce generic info?
-            // But since the requirement is to show Xstream Codes, we attempt to infer from the link's structure:
-            // Some M3U URLs contain user/pass in path: http://server:8080/get.php?username=user&password=pass&type=m3u
-            // already covered above. If no credentials, show limited info, but we try alternative: parse from m3u content if we fetch?? 
-            // But pure client-side parsing without fetching playlist would be limited. The original design shows that "when user enters M3U url it displays details".
-            // But we cannot fetch the playlist due to CORS / security restrictions. However we can simulate extracting from just URL if possible.
-            // For full functionality, we can also support pasting m3u content text (like raw #EXTM3U...), but main focus: extract xtream from URL.
-
-            // Fallback: also check if path contains 'get.php' or 'c/' patterns
             const pathname = urlObj.pathname;
-            if(pathname.includes('get.php') && (!username || !password)) {
-                // might be still credentials in path? rare, but we dig
-                if(trimmed.includes('username=') && trimmed.includes('password=')) {
-                    let usrMatch = trimmed.match(/username=([^&]+)/);
-                    let pwdMatch = trimmed.match(/password=([^&]+)/);
-                    if(usrMatch && pwdMatch) {
-                        username = decodeURIComponent(usrMatch[1]);
-                        password = decodeURIComponent(pwdMatch[1]);
-                        if(username && password) {
-                            let host = urlObj.origin;
-                            let epgLink = `${host}/xmltv.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-                            return {
-                                success: true, type: 'xtream', host, username, password, playlistName: extractPlaylistNameFromUrl(trimmed),
-                                m3uLink: trimmed, epgLink: epgLink, expiry: "N/A", raw: trimmed
-                            };
-                        }
-                    }
+            if (pathname.includes('get.php') && trimmed.includes('username=') && trimmed.includes('password=')) {
+                let usrMatch = trimmed.match(/username=([^&]+)/);
+                let pwdMatch = trimmed.match(/password=([^&]+)/);
+                if (usrMatch && pwdMatch) {
+                    username = decodeURIComponent(usrMatch[1]);
+                    password = decodeURIComponent(pwdMatch[1]);
+                    let host = urlObj.origin;
+                    let epgLink = `${host}/xmltv.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+                    return {
+                        success: true, type: 'xtream', host, username, password,
+                        playlistName: extractPlaylistNameFromUrl(trimmed),
+                        m3uLink: trimmed, epgLink, expiry: "N/A", raw: trimmed
+                    };
                 }
-                throw new Error("M3U link does not contain Xtream credentials (username & password). Please provide a valid Xtream Codes M3U with username/password in URL.");
             }
 
-            // if it has no credentials but appears as generic m3u list, we inform that advanced parsing needs xtream format
             throw new Error("The provided M3U URL does not contain Xtream Codes credentials. Please ensure it includes 'username=XXX&password=XXX' parameters.");
         }
 
         function extractPlaylistNameFromUrl(url) {
             try {
                 let u = new URL(url);
-                let params = u.searchParams;
-                let name = params.get('playlist_name') || params.get('name');
-                if(name) return decodeURIComponent(name);
+                let name = u.searchParams.get('playlist_name') || u.searchParams.get('name');
+                if (name) return decodeURIComponent(name);
                 let hostPart = u.hostname.split('.')[0];
                 return hostPart ? hostPart.toUpperCase() + "_PLAYLIST" : "MY_IPTV";
             } catch(e) { return "VStream_Playlist"; }
         }
 
-        // render details on UI
         function renderXtreamDetails(data) {
-            if(!data.success) throw new Error(data.message || "Parsing failed");
-            dynamicDetailsDiv.innerHTML = ''; // clear
+            if (!data.success) throw new Error(data.message || "Parsing failed");
+            dynamicDetailsDiv.innerHTML = '';
+            lastParsedResult = data;   // save for Copy All
 
-            // defining fields
             const fields = [
-                { label: "Xstream CODES", value: "✅ Supported", icon: "fas fa-check-circle" },
-                { label: "Playlist Name", value: data.playlistName || "VStream_Playlist", icon: "fas fa-list" },
-                { label: "Username", value: data.username, icon: "fas fa-user", copyable: true },
-                { label: "Password", value: data.password, icon: "fas fa-key", copyable: true },
-                { label: "Host/URL", value: data.host, icon: "fas fa-server", copyable: true },
-                { label: "M3U LINK", value: data.m3uLink, icon: "fas fa-link", copyable: true },
-                { label: "EPG LINK", value: data.epgLink || "Not available (or use standard /xmltv.php)", icon: "fas fa-calendar-alt", copyable: data.epgLink ? true : false },
-                { label: "Expired", value: data.expiry || "Unlimited / Check panel", icon: "fas fa-hourglass-half" }
+                { label: "Xstream CODES",  value: "✅ Supported",                                   icon: "fas fa-check-circle" },
+                { label: "Playlist Name",  value: data.playlistName || "VStream_Playlist",           icon: "fas fa-list" },
+                { label: "Username",       value: data.username,                                     icon: "fas fa-user",         copyable: true },
+                { label: "Password",       value: data.password,                                     icon: "fas fa-key",          copyable: true },
+                { label: "Host/URL",       value: data.host,                                         icon: "fas fa-server",       copyable: true },
+                { label: "M3U LINK",       value: data.m3uLink,                                     icon: "fas fa-link",         copyable: true },
+                { label: "EPG LINK",       value: data.epgLink || "Not available",                  icon: "fas fa-calendar-alt", copyable: !!data.epgLink },
+                { label: "Expired",        value: data.expiry || "Unlimited / Check panel",         icon: "fas fa-hourglass-half" }
             ];
 
             fields.forEach(field => {
-                const row = document.createElement('div');
-                row.className = 'detail-row';
+                const row      = document.createElement('div');
+                row.className  = 'detail-row';
                 const labelDiv = document.createElement('div');
                 labelDiv.className = 'detail-label';
-                labelDiv.innerHTML = `<i class="${field.icon}" style="margin-right: 6px; width: 18px;"></i> ${field.label}:`;
+                labelDiv.innerHTML = `<i class="${field.icon}" style="margin-right:6px;width:18px;"></i>${field.label}:`;
                 const valueDiv = document.createElement('div');
                 valueDiv.className = 'detail-value';
-                const rawValue = field.value !== undefined && field.value !== null ? field.value : '—';
+                const rawValue = (field.value !== undefined && field.value !== null) ? field.value : '—';
                 valueDiv.innerHTML = `<span style="word-break:break-all;">${escapeHtml(rawValue)}</span>`;
-                if(field.copyable && rawValue !== '—' && rawValue !== "Not available (or use standard /xmltv.php)" && rawValue !== "Not specified (check panel)") {
-                    const copyBtn = document.createElement('button');
+                if (field.copyable && rawValue !== '—') {
+                    const copyBtn     = document.createElement('button');
                     copyBtn.className = 'copy-btn';
                     copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
-                    copyBtn.title = `Copy ${field.label}`;
-                    copyBtn.onclick = (function(val) { return function() { copyToClipboard(val); }; })(rawValue);
+                    copyBtn.title     = `Copy ${field.label}`;
+                    copyBtn.onclick   = (function(val){ return function(){ copyToClipboard(val); }; })(rawValue);
                     valueDiv.appendChild(copyBtn);
                 }
                 row.appendChild(labelDiv);
@@ -513,84 +441,98 @@
                 dynamicDetailsDiv.appendChild(row);
             });
 
-            // Additional info note
-            const noteRow = document.createElement('div');
+            const noteRow           = document.createElement('div');
             noteRow.style.marginTop = '1rem';
-            noteRow.style.fontSize = '0.75rem';
-            noteRow.style.color = '#a5b4fc';
-            noteRow.style.padding = '0.5rem 0';
-            noteRow.innerHTML = '<i class="fas fa-sync-alt"></i> Use Xtream Codes API with any IPTV player (Smarters, TiviMate, etc)';
+            noteRow.style.fontSize  = '0.75rem';
+            noteRow.style.color     = '#a5b4fc';
+            noteRow.style.padding   = '0.5rem 0';
+            noteRow.innerHTML       = '<i class="fas fa-sync-alt"></i> Use Xtream Codes API with any IPTV player (Smarters, TiviMate, etc)';
             dynamicDetailsDiv.appendChild(noteRow);
-            
+
             resultCard.style.display = 'block';
             hideError();
         }
 
+        // ── COPY ALL DETAILS ──────────────────────────────────────────────
+        function copyAllDetails() {
+            if (!lastParsedResult) return;
+            const d = lastParsedResult;
+            const text = [
+                '╔══════════════════════════════════════╗',
+                '  XTREAM CODES ACCOUNT DETAILS',
+                '╚══════════════════════════════════════╝',
+                '',
+                `Playlist Name : ${d.playlistName || 'VStream_Playlist'}`,
+                `Username      : ${d.username}`,
+                `Password      : ${d.password}`,
+                `Host/URL      : ${d.host}`,
+                `M3U Link      : ${d.m3uLink}`,
+                `EPG Link      : ${d.epgLink || 'Not available'}`,
+                `Expiry        : ${d.expiry || 'Unlimited / Check panel'}`,
+                '',
+                '──────────────────────────────────────',
+                'Compatible with: IPTV Smarters, TiviMate, VLC',
+                '──────────────────────────────────────'
+            ].join('\n');
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    // Visual feedback: temporarily change button
+                    const orig = copyAllBtn.innerHTML;
+                    copyAllBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    copyAllBtn.style.background = 'linear-gradient(105deg, #047857, #059669)';
+                    setTimeout(() => {
+                        copyAllBtn.innerHTML = orig;
+                        copyAllBtn.style.background = '';
+                    }, 2000);
+                    showTemporaryToast('All details copied!');
+                })
+                .catch(() => { alert('Could not copy. Please copy manually:\n\n' + text); });
+        }
+
         function copyToClipboard(text) {
-            if(!text) return;
-            navigator.clipboard.writeText(text).then(() => {
-                showTemporaryToast("Copied!");
-            }).catch(() => {
-                alert("Manual copy: " + text);
-            });
+            if (!text) return;
+            navigator.clipboard.writeText(text)
+                .then(() => showTemporaryToast('Copied!'))
+                .catch(() => alert('Manual copy: ' + text));
         }
 
         function showTemporaryToast(msg) {
-            // simple toast style
             let toast = document.createElement('div');
             toast.innerText = msg;
-            toast.style.position = 'fixed';
-            toast.style.bottom = '25px';
-            toast.style.left = '50%';
-            toast.style.transform = 'translateX(-50%)';
-            toast.style.backgroundColor = '#6366f1';
-            toast.style.color = 'white';
-            toast.style.padding = '0.5rem 1.2rem';
-            toast.style.borderRadius = '40px';
-            toast.style.fontSize = '0.8rem';
-            toast.style.zIndex = '9999';
-            toast.style.fontWeight = '600';
+            Object.assign(toast.style, {
+                position: 'fixed', bottom: '25px', left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#6366f1', color: 'white',
+                padding: '0.5rem 1.2rem', borderRadius: '40px',
+                fontSize: '0.8rem', zIndex: '9999', fontWeight: '600'
+            });
             document.body.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 1800);
+            setTimeout(() => toast.remove(), 1800);
         }
 
         function escapeHtml(str) {
-            if(!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if(m === '&') return '&amp;';
-                if(m === '<') return '&lt;';
-                if(m === '>') return '&gt;';
-                return m;
-            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-                return c;
-            });
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[m] || m));
         }
 
-        // main extraction action
         function processM3U() {
             clearResult();
             let rawInput = m3uTextarea.value.trim();
-            if(!rawInput) {
-                showError("❌ Please paste a valid M3U URL or Xtream link.");
+            if (!rawInput) {
+                showError('❌ Please paste a valid M3U URL or Xtream link.');
                 return;
             }
-            
-            // Show loading state on button
             const originalText = getInfoBtn.innerHTML;
             getInfoBtn.innerHTML = '<span class="spinner"></span> Parsing...';
             getInfoBtn.disabled = true;
-
             setTimeout(() => {
                 try {
                     const result = parseM3UtoXtream(rawInput);
-                    if(result && result.success) {
-                        renderXtreamDetails(result);
-                    } else {
-                        showError("Unable to extract Xtream credentials. Ensure M3U link contains username & password parameters.");
-                    }
-                } catch (err) {
-                    console.error(err);
-                    showError(`⚠️ ${err.message || "Invalid M3U format. Please check your link."}`);
+                    if (result && result.success) renderXtreamDetails(result);
+                    else showError('Unable to extract Xtream credentials. Ensure M3U link contains username & password parameters.');
+                } catch(err) {
+                    showError(`⚠️ ${err.message || 'Invalid M3U format. Please check your link.'}`);
                 } finally {
                     getInfoBtn.innerHTML = originalText;
                     getInfoBtn.disabled = false;
@@ -598,13 +540,10 @@
             }, 50);
         }
 
-        // Example: realistic Xtream demo (fake but credentials pattern)
         function loadExample() {
-            const exampleLink = "https://your-iptv-server.com:8080/get.php?username=demo_user_49f2&password=pass1234&type=m3u_plus&output=mpegts";
-            m3uTextarea.value = exampleLink;
+            m3uTextarea.value = 'https://your-iptv-server.com:8080/get.php?username=demo_user_49f2&password=pass1234&type=m3u_plus&output=mpegts';
             clearResult();
-            // optional auto parse after example?
-            processM3U();  // directly shows details
+            processM3U();
         }
 
         function clearAll() {
@@ -612,43 +551,22 @@
             clearResult();
         }
 
-        // contact us handling
-        function setupContact() {
-            const contactSpan = document.getElementById('contactLink');
-            if(contactSpan) {
-                contactSpan.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.open('https://wa.me/212614567031', '_blank');
-                });
-            }
-            // also fallback contact in footer note
-            const anyContact = document.querySelector('.contact-line span a');
-            if(anyContact && anyContact.id !== 'contactLink') {
-                anyContact.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.open('https://wa.me/212614567031', '_blank');
-                });
-            }
-        }
-
-        // event listeners
+        // Event listeners
         getInfoBtn.addEventListener('click', processM3U);
         exampleBtn.addEventListener('click', loadExample);
         clearBtn.addEventListener('click', clearAll);
+        copyAllBtn.addEventListener('click', copyAllDetails);
 
-        // Add optional: if user presses enter inside textarea with ctrl+enter? (nice to have)
-        m3uTextarea.addEventListener('keydown', (e) => {
-            if((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                e.preventDefault();
-                processM3U();
-            }
+        m3uTextarea.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); processM3U(); }
         });
 
-        setupContact();
+        document.getElementById('contactLink')?.addEventListener('click', e => {
+            e.preventDefault();
+            window.open('https://wa.me/212614567031', '_blank');
+        });
 
-        // initially hide result card
         resultCard.style.display = 'none';
-        // prefill clean state
     })();
 </script>
 </body>
